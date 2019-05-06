@@ -23,14 +23,14 @@ RCT_EXPORT_METHOD(keepOFF)
 RCT_EXPORT_METHOD(unkeepON)
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+        beginIgnoringInteractionEvents()
     });
 }
 
 RCT_EXPORT_METHOD(unkeepOFF)
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+        endIgnoringInteractionEvents()
     });
 }
 
