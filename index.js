@@ -6,23 +6,33 @@ import { NativeModules } from 'react-native';
 let mounted = 0;
 
 export default class KeepAwake extends Component<{}> {
-  static activate() {
-    NativeModules.KCKeepAwake.activate();
+  static keepON() {
+    NativeModules.KCKeepAwake.keepON();
   }
 
-  static deactivate() {
-    NativeModules.KCKeepAwake.deactivate();
+  static unkeepON() {
+    NativeModules.KCKeepAwake.unkeepON();
+  }
+
+  static keepOFF() {
+    NativeModules.KCKeepAwake.keepOFF();
+  }
+
+  static unkeepOFF() {
+    NativeModules.KCKeepAwake.unkeepOFF();
   }
 
   componentDidMount() {
     mounted++;
-    KeepAwake.activate();
+    KeepAwake.keepON();
+    KeepAwake.keepOFF();
   }
 
   componentWillUnmount() {
     mounted--;
     if (!mounted) {
-      KeepAwake.deactivate();
+      KeepAwake.unkeepON();
+      KeepAwake.unkeepOFF();
     }
   }
 

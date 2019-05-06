@@ -22,7 +22,7 @@ public class KCKeepAwake extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void activate() {
+    public void keepON() {
         final Activity activity = getCurrentActivity();
 
         if (activity != null) {
@@ -36,7 +36,7 @@ public class KCKeepAwake extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void deactivate() {
+    public void unkeepON() {
         final Activity activity = getCurrentActivity();
 
         if (activity != null) {
@@ -44,6 +44,34 @@ public class KCKeepAwake extends ReactContextBaseJavaModule {
                 @Override
                 public void run() {
                     activity.getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+            });
+        }
+    }
+
+    @ReactMethod
+    public void keepOFF() {
+        final Activity activity = getCurrentActivity();
+
+        if (activity != null) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_OFF);
+                }
+            });
+        }
+    }
+
+    @ReactMethod
+    public void unkeepOFF() {
+        final Activity activity = getCurrentActivity();
+
+        if (activity != null) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    activity.getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_OFF);
                 }
             });
         }
